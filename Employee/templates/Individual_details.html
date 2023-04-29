@@ -1,0 +1,42 @@
+{% extends 'Base.html' %}
+{% block title %}
+    Individual details
+{% endblock %}
+
+{% block content %}
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+           {% for category, message in messages %}
+              <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  {{ message }}
+              </div>
+           {% endfor %}
+        {% endif %}
+      {% endwith %}
+    <h2 style="margin:25px">Individual Details</h2>
+    <table class="table table-hover table-dark">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">Email ID</th>
+                <th scope="col">Phone No.</th>
+                <th scope="col">Date Of Birth</th>
+                <th scope="col">Address</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{current_user.id}}</td>
+                <td>{{current_user.Firstname}}</td>
+                <td>{{current_user.Lastname}}</td>
+                <td>{{current_user.Email}}</td>
+                <td>{{current_user.phone}}</td>
+                <td>{{current_user.DOB}}</td>
+                <td>{{current_user.Address}}</td>
+            </tr>
+        </tbody>
+    </table>
+{% endblock %}

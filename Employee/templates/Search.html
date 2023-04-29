@@ -1,0 +1,51 @@
+{% extends 'Base.html' %}
+{% block title %}
+    Search Employees
+{% endblock %}
+
+{% block content %}
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+           {% for category, message in messages %}
+              <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  {{ message }}
+              </div>
+           {% endfor %}
+        {% endif %}
+      {% endwith %}
+    <h2 class="text-success" style="margin:25px">Search Details</h2>
+    <table class="table table-hover table-dark">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">Email ID</th>
+                <th scope="col">Phone No.</th>
+                <th scope="col">Date Of Birth</th>
+                <th scope="col">Address</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if query_a %}
+                {% for item in query_a %}
+                    <tr>
+                        <td>{{item.id}}</td>
+                        <td>{{item.Firstname}}</td>
+                        <td>{{item.Lastname}}</td>
+                        <td>{{item.Email}}</td>
+                        <td>{{item.phone}}</td>
+                        <td>{{item.DOB}}</td>
+                        <td>{{item.Address}}</td>
+                        <td>
+                            <a href="/update/{{item.id}}" class="btn btn-warning">Edit</a>
+                            <a href="/delete/{{item.id}}" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
+        </tbody>
+    </table>
+{% endblock %}

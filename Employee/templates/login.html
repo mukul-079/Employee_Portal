@@ -1,0 +1,54 @@
+{% extends 'Base.html' %}
+{% block title %}
+  Login
+{% endblock %}
+
+{% block content %}
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+           {% for category, message in messages %}
+              <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  {{ message }}
+              </div>
+           {% endfor %}
+        {% endif %}
+      {% endwith %}
+    <br>
+    <div class="container">
+        <form method="POST" class="form-signin" style="color:white">
+            {{ form.hidden_tag() }}
+            <h1 class="h3 mb-3 font-weight-normal text-primary">
+                <b>Login</b>
+            </h1>
+            <br>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">
+                    <b>{{ form.Email.label() }}</b>
+                </label>
+                <div class="col-sm-10">
+                    {{ form.Email(class="form-control", placeholder="Enter Your Email") }}
+                </div>
+            </div><br>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">
+                    <b>{{ form.password.label() }}</b>
+                </label>
+                <div class="col-sm-10">
+                    {{ form.password(class="form-control", placeholder="Password") }}
+                </div>
+            </div><br>
+            {{ form.submit(class="btn btn-lg btn-block btn-info") }}
+            <br>
+            <br>
+            <center>
+                <div class="checkbox mb-3">
+                   <h6>Don't have an account?</h6>
+                   <a class="btn btn-sm btn-secondary" href="/register">Register</a>
+                </div>
+            </center>
+        </form>
+    </div>
+
+{% endblock %}
