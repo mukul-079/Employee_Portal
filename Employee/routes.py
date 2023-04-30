@@ -4,6 +4,7 @@ from flask import render_template, redirect, url_for, flash, request
 from Employee.models import Item
 from Employee.Forms import RegisterForm, LoginForm, searchForm
 from Employee import db, bcrypt
+from sqlalchemy import func
 from flask_login import login_user, logout_user, current_user
 
 # Home page
@@ -40,7 +41,7 @@ def search_page():
     form = searchForm()
     if form.validate_on_submit:
         searched = form.searched.data
-        query_a = Item.query.filter(Item.Firstname.like('%'+searched+'%')+" "+ Item.Lastname.like('%'+searched+'%')+" "+ Item.Address.like('%'+searched+'%'))
+        query_a = Item.query.filter(func.CONCAT(Item.Firstname," ", Item.Lastname," ", Item.Address).like('%'+searched+'%'))
         return render_template('Search.html', form=form, searched=searched, query_a=query_a)
     return render_template('Search.html', form=form)
 
